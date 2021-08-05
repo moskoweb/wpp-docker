@@ -35,8 +35,7 @@ services:
     container_name: wppconnect-nginx
     entrypoint: nginx -g "daemon off;"
     ports:
-      - "8080:8080"
-      - "8081:8081"
+      - "80:80"
     networks: 
       - wpp-network
     depends_on:

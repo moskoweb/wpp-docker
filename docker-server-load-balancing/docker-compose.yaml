@@ -113,14 +113,14 @@ services:
     hostname: wppconnect-nginx
     entrypoint: nginx -g "daemon off;"
     ports:
-      - "8081:8081"
+      - "80:80"
     networks: 
       wpp-network:
         ipv4_address: 172.20.0.7
     deploy:
       resources:
         limits:
-          memory: 8192M
+          memory: 1024M
         reservations:
           memory: 200M
     depends_on:
