@@ -1,0 +1,33 @@
+version: '3'
+
+services: 
+
+  wppconnect-server:
+    build: 
+      context: ./wppconnect-server
+      dockerfile: Dockerfile
+    image: wppconnect-server
+    container_name: wppconnect-server
+    hostname: wppconnect-server
+    entrypoint: docker-entrypoint.sh pm2 start npm
+    networks: 
+      - wpp-network
+    tty: true
+  
+  wppconnect-nginx:
+    build: 
+      context: ./wppconnect-nginx
+      dockerfile: Dockerfile
+    container_name: wppconnect-nginx
+    entrypoint: nginx -g "daemon off;"
+    ports:
+      - "80:80"
+    networks: 
+      - wpp-network
+    depends_on:
+      - wppconnect-server
+
+networks: 
+  wpp-network:
+    name: wpp-network
+    driver: bridge 
